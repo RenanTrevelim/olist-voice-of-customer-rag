@@ -1,0 +1,26 @@
+# Ambientes virtuais
+.venv/
+venv/
+env/
+
+# Chaves de API e configurações locais
+.env
+.env.*
+!.env.example
+
+# Cache Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Dados e índices gerados
+data/raw/
+data/processed/
+vector_store/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
