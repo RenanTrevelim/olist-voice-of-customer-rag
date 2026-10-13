@@ -34,7 +34,7 @@ CAMINHO_CSV = BASE_DIR / "dados" / "processed" / "dados_rag.csv"
 # ==================================================
 
 def carregar_documentos() -> list[Document]:
-    """Lê o CSV e transforma cada avaliação em um documento"""
+    """Lê o arquivo CSV e transfome em um documento."""
 
     dados = pd.read_csv(CAMINHO_CSV, keep_default_na=False)
 
@@ -51,10 +51,10 @@ def carregar_documentos() -> list[Document]:
                 "data": linha["review_creation_date"]
             }
         )
-
         documentos.append(documento)
 
     return documentos
+        
 
 # ==================================================
 # 2. DIVIDINDO OS DOCUMENTOS
@@ -68,15 +68,15 @@ def dividir_documentos(documentos):
         chunk_overlap=150
     )
 
-    trechos = divisor.split_documents(documentos)
+    trechos = divisor.split_documents(
+        documents=documentos
+    )
 
     print(f"Total de Documentos -> {len(documentos)}")
-    print(f"\nTotal de trechos criados -> {len(trechos)}")
+    print(f"\nTotal de Trechos gerados -> {len(trechos)}")
 
     return trechos
 
-documentos = carregar_documentos()
-trechos = dividir_documentos(documentos)
 
 # ==================================================
 # 3. CRIANDO EMBEDDINGS + BANCO VETORIAL
@@ -107,7 +107,7 @@ def recuperar_documento(pergunta, banco):
 
     documentos = banco.similarity_search(
         pergunta,
-        k=6
+        k=10
     )
 
     partes = []
@@ -117,11 +117,10 @@ def recuperar_documento(pergunta, banco):
 
         parte = (
             f"[{identificador}]\n"
-            f"nota : {documento.metadata["nota"]}\n"
-            f"titulo : {documento.metadata["titulo"]}\n"
-            f"Conteúdo : {documento.page_content}"
+            f"titulo: {documento.metadata["titulo"]}\n"
+            f"nota: {documento.metadata["nota"]}\n"
+            f"contexto: {documento.page_content}"
         )
-
         partes.append(parte)
 
     contexto = "\n\n".join(partes)
@@ -246,8 +245,8 @@ def criar_chain_modelo(modelo):
         </pergunta>
 
         Responda seguindo as instruções e o schema definidos.
-        """)
-        ])
+    """)
+    ])
 
     modelo_estruturado = modelo.with_structured_output(RespostaConsulta)
 
