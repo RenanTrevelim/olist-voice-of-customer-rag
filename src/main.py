@@ -481,16 +481,31 @@ def criar_interpretador(modelo):
 # 13. PREPARAR OS COMPONENTES
 # ==================================================
 
-modelo = criar_modelo()
+componentes_preparados = False
 
-gerador_resposta = chain_resposta(modelo)
-avaliador = cria_chain_avaliacao(modelo)
-reformulador = cria_chain_reformulacao(modelo)
-interpretador = criar_interpretador(modelo)
 
-documentos = cria_documentos()
-trechos = dividir_documentos(documentos)
-banco = criar_banco(trechos)
+def preparar_componentes():
+    """Inicializa as chains e o banco vetorial."""
+
+    global componentes_preparados
+    global gerador_resposta, avaliador
+    global reformulador, interpretador, banco
+
+    if componentes_preparados:
+        return
+
+    modelo = criar_modelo()
+
+    gerador_resposta = chain_resposta(modelo)
+    avaliador = cria_chain_avaliacao(modelo)
+    reformulador = cria_chain_reformulacao(modelo)
+    interpretador = criar_interpretador(modelo)
+
+    documentos = cria_documentos()
+    trechos = dividir_documentos(documentos)
+    banco = criar_banco(trechos)
+
+    componentes_preparados = True
 
 # ==================================================
 # NÓ: INTERPRETAR A PERGUNTA
@@ -651,6 +666,8 @@ def informar_limitacao(estado: EstadoConsulta):
 
 def criar_grafo():
     """Organiza a pesquisa, a avaliação e a nova tentativa de busca."""
+
+    preparar_componentes()
 
     grafo = StateGraph(EstadoConsulta)
 
