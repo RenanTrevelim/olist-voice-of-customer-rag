@@ -12,6 +12,13 @@ O projeto reúne **RAG, LangChain, LangGraph e Pydantic**, com uma interface em 
 
 ---
 
+## Aplicação em funcionamento
+
+![Aplicação Olist Voice of Customer respondendo a uma consulta sobre entrega](imagens/aplicacao-streamlit.png)
+
+*Consulta às avaliações de clientes, com acesso aos comentários
+recuperados e à trilha de execução do LangGraph.*
+
 ## Problema de negócio
 
 Avaliações de clientes contêm informações importantes sobre atrasos, qualidade dos produtos, atendimento e experiência de compra. Entretanto, consultar esses relatos individualmente dificulta a exploração de grandes volumes de texto.
@@ -167,6 +174,8 @@ A validação com Pydantic verifica a estrutura dos dados. Ela não garante, por
 
 ```text
 olist-voice-of-customer-rag/
+├── imagens/
+│   └── aplicacao-streamlit.png
 ├── dados/
 │   ├── raw/
 │   └── processed/
