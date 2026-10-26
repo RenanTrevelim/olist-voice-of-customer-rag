@@ -19,6 +19,8 @@ O projeto reúne **RAG, LangChain, LangGraph e Pydantic**, com uma interface em 
 *Consulta às avaliações de clientes, com acesso aos comentários
 recuperados e à trilha de execução do LangGraph.*
 
+---
+
 ## Problema de negócio
 
 Avaliações de clientes contêm informações importantes sobre atrasos, qualidade dos produtos, atendimento e experiência de compra. Entretanto, consultar esses relatos individualmente dificulta a exploração de grandes volumes de texto.
