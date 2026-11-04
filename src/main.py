@@ -57,7 +57,7 @@ def cria_documentos():
     documentos = []
 
     for indice, linha in dados.iterrows():
-        texto = str(linha["review_comment_message"]).strip()
+        texto = str(linha["comentario"]).strip()
 
         if not texto:
             continue
@@ -67,8 +67,9 @@ def cria_documentos():
             metadata = {
                 "id_registro": str(indice),
                 "fonte": CAMINHO_CSV.name,
-                "titulo": str(linha["review_comment_title"]).strip(),
-                "nota": int(linha["review_score"])
+                "titulo": str(linha["titulo"]).strip(),
+                "nota": int(linha["nota"]),
+                "sentimento": str(linha["sentimento"])
             }
         )
 
@@ -136,6 +137,7 @@ def recuperar_documentos(pergunta, banco):
             f"FONTE: {documento.metadata['fonte']}\n"
             f"TITULO: {documento.metadata['titulo']}\n"
             f"NOTA: {documento.metadata['nota']}\n"
+            f"SENTIMENTO: {documento.metadata['sentimento']}\n"
             f"CONTEÚDO: {documento.page_content}"
         )
 
