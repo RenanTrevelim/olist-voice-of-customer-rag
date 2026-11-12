@@ -221,24 +221,37 @@ def chain_resposta(modelo):
 
             APRESENTAÇÃO
 
-            - Escreva um parágrafo curto ou uma lista breve,
-              conforme a pergunta.
-            - Prefira uma síntese com suas próprias palavras,
-              sem copiar uma sequência de comentários.
-            - Não inclua identificadores como [F1], números de
-              registros ou nomes de arquivos na resposta.
-              As avaliações recuperadas serão exibidas pelo sistema
-              em uma seção separada.
-            - Evite repetir a mesma informação.
+            - Use português do Brasil, com linguagem simples e objetiva.
+            - Se houver apenas um tema, responda em um parágrafo curto,
+              sem marcadores nem título repetido dentro da resposta.
+            - Se houver temas diferentes, use uma introdução curta
+              seguida de até quatro marcadores.
+            - Separe a introdução da lista por uma linha em branco.
+              Cada marcador deve começar em uma nova linha.
+            - Em cada marcador, use um título curto em negrito
+              seguido de uma frase explicativa.
+            - Agrupe relatos semelhantes sem repetir informações.
+            - Não atribua a todos os comentários um detalhe mencionado
+              por apenas um deles. Use "um dos relatos também menciona"
+              quando necessário.
+            - Evite notas, contagens e citações literais, exceto quando
+              solicitadas ou necessárias para responder.
+            - Não mostre identificadores como F1 ou [F1],
+              números de registros ou nomes de arquivos.
+            - Limite a resposta aos comentários recuperados,
+              sem generalizar para toda a base.
 
             SAÍDA
 
-            Retorne somente um objeto JSON válido com duas strings:
+            Retorne exclusivamente um objeto JSON válido com dois campos:
+            - "assunto": string com um título curto.
+            - "resposta": string com a síntese dos comentários.
 
-            - assunto: tema central, ou "" se não identificado.
-            - resposta: síntese objetiva dos relatos.
-
-            Não inclua blocos de código nem texto fora do JSON.
+            A lista, quando utilizada, deve estar dentro da string
+            "resposta", nunca como um array JSON.
+            Escape corretamente aspas e quebras de linha dentro das strings.
+            Não envolva o objeto JSON em blocos de código.
+            Não escreva nada antes ou depois do JSON.
             """
         ),
         (
